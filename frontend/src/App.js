@@ -17,6 +17,9 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RecommendationDashboard from "./pages/RecommendationDashboard";
 import ResumeAnalyzer from "./pages/ResumeAnalyzer";
+import Chatbot from "./components/Chatbot";  
+
+
 
 function App() {
   return (
@@ -99,6 +102,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+
+         {/* ✅ Add Chatbot so it's visible on every page */}
+      <Chatbot />
       </Router>
     </AuthProvider>
   );

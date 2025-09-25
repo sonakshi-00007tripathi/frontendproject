@@ -21,7 +21,7 @@ export default function Home() {
 
       {/* Header */}
       <header className="main-header">
-        <div className="logo">PMIR Internship</div>
+        <div className="logo">PM Internship Recommender</div>
         <div className="header-btns">
           <button className="btn-orange" onClick={() => navigate("/signup")}>
             Youth Registration
@@ -141,6 +141,46 @@ export default function Home() {
 </section>
 
       
+      {/* Internship Stats Section */}
+      <section className="stats-map-section">
+        <div className="stats-map-container">
+          {/* Left Side: India Map */}
+        <div className="map-section">
+  <img
+    src="https://vemaps.com/uploads/img/in-06.png"
+    alt="India Map"
+    className="india-map"
+  />
+</div>
+
+
+          {/* Right Side: Stats */}
+          <div className="stats-section">
+            <div className="stat-box big">
+              <h2>118K+</h2>
+              <p>Internship Opportunities</p>
+            </div>
+            <div className="stat-grid">
+              <div className="stat-box">
+                <h3>25</h3>
+                <p>Sectors</p>
+              </div>
+              <div className="stat-box">
+                <h3>36</h3>
+                <p>States/UTs</p>
+              </div>
+              <div className="stat-box">
+                <h3>734</h3>
+                <p>Districts</p>
+              </div>
+              <div className="stat-box">
+                <h3>5</h3>
+                <p>Qualifications</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
 
 

@@ -1,0 +1,142 @@
+.find-internship-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f9f9f9, #eef4ff);
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.form-header h2 {
+  font-size: 2rem;
+  color: #003366;
+}
+.form-header span {
+  color: #ff7f0f;
+  font-weight: bold;
+}
+
+.internship-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form Cards */
+.form-card {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border-left: 5px solid #ff7f0f;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.form-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+.form-card h3 {
+  margin-bottom: 1rem;
+  color: #003366;
+}
+
+/* Inputs */
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  background: #f8faff;
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ddd;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+.input-group:focus-within {
+  border-color: #1a73e8;
+  box-shadow: 0 0 6px rgba(26, 115, 232, 0.4);
+}
+.input-group .icon {
+  color: #1a73e8;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+.input-group input,
+.input-group select {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
+  padding: 0.4rem;
+}
+
+/* File upload */
+.file-upload {
+  margin-top: 0.5rem;
+}
+
+/* Button */
+.btn-submit {
+  padding: 1rem;
+  background: #ff7f0f;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-submit:hover {
+  background: #e06a00;
+}
+
+/* Resume Upload Highlight */
+.resume-upload-highlight {
+  background: linear-gradient(135deg, #c2e1ff, #9eb9db);
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resume-upload-highlight:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+}
+
+.resume-upload-highlight h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.resume-upload-highlight p {
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  opacity: 0.95;
+}
+
+.resume-upload-highlight .file-upload {
+  background: white;
+  color: #0e3154;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.resume-upload-highlight small {
+  display: block;
+  margin-top: 0.6rem;
+  opacity: 0.85;
+}

@@ -1,161 +1,210 @@
 import React, { useState } from "react";
-import "./FindInternship.css";
+import "../styles/FindInternship.css";
+import { FaUser, FaGraduationCap, FaLaptopCode, FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
 
 export default function FindInternship() {
   const [form, setForm] = useState({
     name: "",
-    contact: "",
+    degree: "",
+    year_of_study: "",
+    domain: "",
     skills: "",
-    education: "",
-    locations: [],
-    sectors: [],
-    age: "",
-    jobStatus: "Not Employed Full Time",
-    enrolled: "Not Enrolled Full Time",
-    familyIncomeOK: true,
-    familyGovJobNo: true,
+    resume: null,
+    location_preference: "",
+    duration_preference: "",
+    stipend_expectation: "",
+    email: "",
+    phone: "",
   });
 
-  const [result, setResult] = useState(null);
-
-  const CITIES = ["Delhi", "Mumbai", "Bengaluru", "Hyderabad", "Chennai", "Kolkata"];
-  const SECTORS = ["AI/ML", "Cybersecurity", "Finance", "Data Science", "Web Dev"];
-
-  const toggleLocation = (city) => {
-    setForm((prev) => {
-      const has = prev.locations.includes(city);
-      return { ...prev, locations: has ? prev.locations.filter((c) => c !== city) : [...prev.locations, city] };
-    });
-  };
-
-  const toggleSector = (sector) => {
-    setForm((prev) => {
-      const has = prev.sectors.includes(sector);
-      return { ...prev, sectors: has ? prev.sectors.filter((s) => s !== sector) : [...prev.sectors, sector] };
-    });
-  };
-
-  const checkEligibility = () => {
-    const age = Number(form.age);
-    return (
-      age >= 21 &&
-      age <= 24 &&
-      form.jobStatus === "Not Employed Full Time" &&
-      form.enrolled === "Not Enrolled Full Time" &&
-      form.familyIncomeOK &&
-      form.familyGovJobNo
-    );
-  };
-
-  const handleFetch = (e) => {
-    e.preventDefault();
-    if (!checkEligibility()) {
-      setResult({ eligible: false });
-      return;
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "resume") {
+      setForm({ ...form, resume: files[0] });
+    } else {
+      setForm({ ...form, [name]: value });
     }
-    // Demo internships — replace with backend API later
-    const demoInternships = Array.from({ length: 5 }).map((_, i) => ({
-      id: i + 1,
-      title: `${form.sectors[0] || "General"} Internship ${i + 1}`,
-      company: `Company ${i + 1}`,
-      location: form.locations.join(", ") || "Remote",
-      stipend: "₹4500 / month",
-    }));
-    setResult({ eligible: true, internships: demoInternships });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("🚀 Profile submitted successfully! (Backend integration coming soon)");
+    console.log(form);
   };
 
   return (
-    <div className="find-container">
-      <h2>Find Internship</h2>
-      <form onSubmit={handleFetch} className="form-box">
-        <input placeholder="Full name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
-        <input placeholder="Email / Phone" value={form.contact} onChange={(e) => setForm({ ...form, contact: e.target.value })} />
-        <input placeholder="Skills (comma separated)" value={form.skills} onChange={(e) => setForm({ ...form, skills: e.target.value })} />
-        <input placeholder="Education / Qualification" value={form.education} onChange={(e) => setForm({ ...form, education: e.target.value })} />
+    <div className="find-internship-page">
+      <div className="form-header">
+        <h2>🎓 Student Internship Profile</h2>
+        <p>Fill in your details to get <span>ML-powered internship recommendations</span>.</p>
+      </div>
 
-        <label>Location Preferences:</label>
-        <div className="multi-options">
-          {CITIES.map((city) => (
-            <button
-              type="button"
-              key={city}
-              className={form.locations.includes(city) ? "selected" : ""}
-              onClick={() => toggleLocation(city)}
-            >
-              {city}
-            </button>
-          ))}
-        </div>
-
-        <label>Sector Interests:</label>
-        <div className="multi-options">
-          {SECTORS.map((sector) => (
-            <button
-              type="button"
-              key={sector}
-              className={form.sectors.includes(sector) ? "selected" : ""}
-              onClick={() => toggleSector(sector)}
-            >
-              {sector}
-            </button>
-          ))}
-        </div>
-
-        <label>Age:</label>
-        <input type="number" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} required />
-
-        <label>Job Status:</label>
-        <select value={form.jobStatus} onChange={(e) => setForm({ ...form, jobStatus: e.target.value })}>
-          <option>Not Employed Full Time</option>
-          <option>Employed Full Time</option>
-        </select>
-
-        <label>Education Status:</label>
-        <select value={form.enrolled} onChange={(e) => setForm({ ...form, enrolled: e.target.value })}>
-          <option>Not Enrolled Full Time</option>
-          <option>Enrolled Full Time</option>
-        </select>
-
-        <label>Family Income ≤ ₹8 Lakhs?</label>
-        <select value={form.familyIncomeOK ? "yes" : "no"} onChange={(e) => setForm({ ...form, familyIncomeOK: e.target.value === "yes" })}>
-          <option value="yes">Yes (OK)</option>
-          <option value="no">No (Not Eligible)</option>
-        </select>
-
-        <label>Any family member with Govt job?</label>
-        <select value={form.familyGovJobNo ? "no" : "yes"} onChange={(e) => setForm({ ...form, familyGovJobNo: e.target.value === "no" })}>
-          <option value="no">No (OK)</option>
-          <option value="yes">Yes (Not Eligible)</option>
-        </select>
-
-        <label>Upload CV (PDF)</label>
-        <input type="file" accept="application/pdf" />
-
-        <button type="submit" className="fetch-btn">Fetch Internships</button>
-      </form>
-
-      {result && !result.eligible && (
-        <div className="not-eligible">
-          ❌ You are not eligible for the PM Internship Scheme.
-        </div>
-      )}
-
-      {result && result.eligible && (
-        <div className="internship-results">
-          <h3>Recommended Internships</h3>
-          <div className="cards">
-            {result.internships.map((intern) => (
-              <div key={intern.id} className="card">
-                <h4>{intern.title}</h4>
-                <p><b>{intern.company}</b></p>
-                <p>{intern.location}</p>
-                <p>{intern.stipend}</p>
-                <button>Apply Now</button>
-              </div>
-            ))}
+      <form className="internship-form" onSubmit={handleSubmit}>
+        
+        {/* Identification */}
+        <div className="form-card">
+          <h3>👤 Identification</h3>
+          <div className="input-group">
+            <FaUser className="icon" />
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
           </div>
         </div>
-      )}
+
+        {/* Academic Info */}
+        <div className="form-card">
+          <h3>🎓 Academic Info</h3>
+          <div className="input-group">
+            <FaGraduationCap className="icon" />
+            <select name="degree" value={form.degree} onChange={handleChange} required>
+              <option value="">Select Degree</option>
+              <option>B.Tech</option>
+              <option>MBA</option>
+              <option>B.Sc</option>
+              <option>M.Sc</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <FaGraduationCap className="icon" />
+            <select
+              name="year_of_study"
+              value={form.year_of_study}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Year of Study</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <FaLaptopCode className="icon" />
+            <select
+              name="domain"
+              value={form.domain}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Domain</option>
+              <option>AI/ML</option>
+              <option>Web Development</option>
+              <option>Cybersecurity</option>
+              <option>Finance</option>
+              <option>Marketing</option>
+            </select>
+          </div>
+        </div>
+{/* Skills */}
+<div className="form-card">
+  <h3>💡 Skills</h3>
+  <div className="input-group">
+    <FaLaptopCode className="icon" />
+    <input
+      type="text"
+      name="skills"
+      placeholder="Enter skills (comma separated)"
+      value={form.skills}
+      onChange={handleChange}
+      required
+    />
+  </div>
+  <small>Tip: Add at least 3–5 core skills for better matches</small>
+</div>
+
+{/* Resume Upload - NEW Separate Row */}
+<div className="form-card resume-upload-highlight">
+  <h3>Upload Resume</h3>
+  <p>Let Us analyze your CV & auto-suggest skills and internships 🚀</p>
+  <input
+    type="file"
+    name="resume"
+    accept=".pdf,.doc,.docx"
+    onChange={handleChange}
+    className="file-upload"
+  />
+  <small>Supported formats: PDF, DOC, DOCX</small>
+</div>
+
+
+        {/* Preferences */}
+        <div className="form-card">
+          <h3>📍 Preferences</h3>
+          <div className="input-group">
+            <FaMapMarkerAlt className="icon" />
+            <select
+              name="location_preference"
+              value={form.location_preference}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Location Preference</option>
+              <option>Remote</option>
+              <option>Delhi</option>
+              <option>Mumbai</option>
+              <option>Bangalore</option>
+              <option>Hyderabad</option>
+            </select>
+          </div>
+
+          <input
+            type="text"
+            name="duration_preference"
+            placeholder="Preferred Duration (e.g., 6 months)"
+            value={form.duration_preference}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="stipend_expectation"
+            placeholder="Stipend Expectation (optional)"
+            value={form.stipend_expectation}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Contact */}
+        <div className="form-card">
+          <h3>📞 Contact</h3>
+          <div className="input-group">
+            <FaEnvelope className="icon" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <FaPhone className="icon" />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              value={form.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="btn-submit">
+          Get Internship Recommendations
+        </button>
+      </form>
     </div>
   );
 }

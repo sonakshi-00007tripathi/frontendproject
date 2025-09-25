@@ -1,0 +1,95 @@
+/* ResumeAnalyzer.css - place in src/styles/ResumeAnalyzer.css */
+.analyzer-page {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #17384b;
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+/* Hero */
+.analyzer-hero {
+  display: flex;
+  gap: 2rem;
+  padding: 2.2rem;
+  align-items: center;
+  background: linear-gradient(90deg, #f6f9fb 0%, #ffffff 100%);
+  border-bottom: 1px solid #eef3f7;
+}
+
+.hero-left { flex: 1.2; }
+.hero-right { flex: 0.7; display:flex; flex-direction:column; align-items:center; gap:1rem; }
+
+.analyzer-hero h1 {
+  color: #003366;
+  font-size: 2.1rem;
+  margin-bottom: 0.4rem;
+}
+.subtitle { color: #4a6a7a; margin-bottom: 1rem; }
+
+.upload-card { background: #fff; border: 1px solid #e8eef3; padding: 1rem; border-radius: 10px; box-shadow: 0 8px 25px rgba(3,20,34,0.03); }
+.file-label input[type="file"] { display:none; }
+.file-drop { display:flex; gap:1rem; align-items:center; cursor:pointer; }
+.file-drop img { width:68px; opacity:0.9; }
+.file-drop strong { display:block; color:#172b3a; }
+.file-drop .muted { color:#7f99a7; font-size:0.9rem; margin-top:6px; }
+
+.upload-actions { display:flex; gap:0.6rem; margin-top:1rem; }
+.loader { margin-top:0.8rem; color:#ff7f0f; font-weight:600; }
+
+.btn-orange, .btn-blue, .btn-outline {
+  border-radius:8px; padding:0.6rem 0.9rem; font-weight:600; cursor:pointer; border:none;
+}
+.btn-orange { background: #ff7f0f; color:#fff; }
+.btn-blue { background: #1a73e8; color:#fff; }
+.btn-outline { background: transparent; color: #1a73e8; border: 1px solid #d7e6ff; }
+
+/* Body layout */
+.analyzer-body { padding: 2rem; display:block; max-width:1200px; margin:0 auto; gap:1.5rem; }
+
+/* Extraction section */
+.extraction { display:grid; grid-template-columns: 1fr 360px; gap:1.5rem; align-items:start; margin-bottom:1.5rem; }
+.panel { background:#fff; border-radius:10px; padding:1.1rem; border:1px solid #eef3f7; box-shadow: 0 6px 18px rgba(3,20,34,0.03); }
+.panel h3 { margin:0 0 0.4rem 0; color:#003366; }
+
+.skill-list { display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center; }
+.skill-tag { background:#e9f4ff; color:#034a7c; padding:0.5rem 0.7rem; border-radius:999px; display:inline-flex; gap:0.5rem; align-items:center; font-weight:600; }
+.skill-tag button { background:transparent; border:none; color:#034a7c; margin-left:6px; font-size:1rem; cursor:pointer; }
+.add-skill { background:transparent; border:1px dashed #d0e6ff; color:#034a7c; padding:0.4rem 0.7rem; border-radius:8px; cursor:pointer; }
+
+/* Snapshot */
+.snapshot div { display:flex; justify-content:space-between; padding:0.35rem 0; border-bottom:1px dashed #eef6fb; color:#425a66; }
+.muted.small { color:#6f808b; font-size:0.9rem; }
+
+/* Recommendations */
+.recommendations { margin-top:1rem; }
+.recommend-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:0.8rem; }
+.rec-card { background:#fff; padding:1rem; border-radius:10px; border:1px solid #eef4f9; display:flex; flex-direction:column; gap:0.6rem; }
+.rec-top h4 { margin:0; color:#003366; }
+.rec-top .muted { color:#7b8c96; font-size:0.9rem; }
+.skill-badges { display:flex; gap:0.4rem; flex-wrap:wrap; }
+.badge { background:#f1fbff; color:#055a88; padding:0.3rem 0.5rem; border-radius:6px; font-size:0.85rem; }
+.match-row { display:flex; align-items:center; gap:0.6rem; margin-top:0.4rem; }
+.match-bar { height:10px; background:#eef6fb; border-radius:999px; flex:1; overflow:hidden; }
+.match-bar .fill { height:100%; background:linear-gradient(90deg,#34c0a2,#1a73e8); transition: width 0.5s; }
+.score { min-width:44px; text-align:right; font-weight:700; color:#034a7c; }
+
+/* rec actions */
+.rec-actions { display:flex; gap:0.5rem; margin-top:auto; }
+.rec-actions button { flex:1; padding:0.5rem; border-radius:8px; }
+
+/* Extras */
+.extras { margin-top:1.5rem; }
+.extras-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; }
+.extra-card { background:#fff; padding:1rem; border-radius:10px; text-align:center; border:1px solid #eef4f9; }
+.extra-card img { width:64px; margin-bottom:0.6rem; }
+
+/* Raw preview */
+.raw-preview { margin-top:1.5rem; }
+.raw-preview textarea { width:100%; min-height:160px; border-radius:8px; border:1px solid #e6eef6; padding:0.8rem; font-family:monospace; background:#fbfeff; color:#233; }
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .analyzer-hero { flex-direction:column; padding:1rem; }
+  .extraction { grid-template-columns: 1fr; }
+  .hero-right { order:2; }
+}

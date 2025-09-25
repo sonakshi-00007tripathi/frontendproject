@@ -1,0 +1,173 @@
+.about-container {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.two-column img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.highlight {
+  color: #e95420;
+  font-weight: bold;
+}
+
+.mission h2,
+.benefits h2,
+.govt h2,
+.developers h2,
+.cta h2 {
+  text-align: center;
+  color: #e95420;
+  margin-bottom: 30px;
+}
+
+.mission-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card .icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.benefit-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.benefit {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.benefit h3 {
+  margin-bottom: 15px;
+}
+
+.govt {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+  background: #2e7d32;
+  color: white;
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.govt img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.developer-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.dev-card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dev-card:hover {
+  transform: translateY(-5px);
+}
+
+.dev-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.cta {
+  text-align: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 50px 20px;
+}
+
+.cta-buttons {
+  margin-top: 20px;
+}
+
+.primary {
+  background: #e95420;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.secondary {
+  border: 2px solid #e95420;
+  color: #e95420;
+  background: white;
+  padding: 12px 25px;
+  border-radius: 6px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.primary:hover {
+  background: #d94315;
+}
+
+.secondary:hover {
+  background: #fbe9e7;
+}

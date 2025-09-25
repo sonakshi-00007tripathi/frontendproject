@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Eligibility.css";
-import { FaUserCheck, FaBan, FaGraduationCap, FaRupeeSign, FaBuilding } from "react-icons/fa";
+import { FaUserCheck,  FaGraduationCap, FaRupeeSign, FaBuilding } from "react-icons/fa";
 import { MdWork, MdOutlineSecurity } from "react-icons/md";
 
 export default function Eligibility() {

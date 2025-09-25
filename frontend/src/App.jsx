@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+// import Chatbot from "./components/Chatbot";
 
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
@@ -12,14 +14,11 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import RecommendationDashboard from "./pages/RecommendationDashboard";
+import ResumeAnalyzer from "./pages/ResumeAnalyzer";
 
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import RecommendationDashboard from "./pages/RecommendationDashboard";
-import ResumeAnalyzer from "./pages/ResumeAnalyzer";
-import Chatbot from "./components/Chatbot";  
-
-
 
 function App() {
   return (
@@ -27,11 +26,11 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          {/* Public */}
+          {/* Public Routes */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Protected */}
+          {/* Protected Routes */}
           <Route
             path="/"
             element={
@@ -40,6 +39,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/" element={<Dashboard />} />
           <Route
             path="/home"
             element={
@@ -81,30 +81,27 @@ function App() {
             }
           />
           <Route
-  path="/recommendations"
-  element={
-    <RecommendationDashboard />
-  }
-/>
-
-<Route
-  path="/resume-analyzer"
-  element={
-    <ResumeAnalyzer />
-  }
-/>
-
-       
-         
-        
+            path="/recommendations"
+            element={
+              <ProtectedRoute>
+                <RecommendationDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/resume-analyzer"
+            element={
+              <ProtectedRoute>
+                <ResumeAnalyzer />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Fallback */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
-
-         {/* ✅ Add Chatbot so it's visible on every page */}
-      <Chatbot />
+        {/* <Chatbot /> */}
       </Router>
     </AuthProvider>
   );

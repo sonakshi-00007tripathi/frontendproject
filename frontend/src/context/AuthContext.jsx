@@ -1,15 +1,17 @@
 import React, { createContext, useState, useEffect } from "react";
 
+// Named export for context
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null); // null = loading
 
-  // ✅ check localStorage on refresh
   useEffect(() => {
     const storedAuth = localStorage.getItem("isAuthenticated");
     if (storedAuth === "true") {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, []);
 
@@ -22,6 +24,11 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     localStorage.removeItem("isAuthenticated");
   };
+
+  // Loading fallback → no blank screen
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>

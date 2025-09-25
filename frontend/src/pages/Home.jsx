@@ -74,12 +74,18 @@ export default function Home() {
 </section>
 
 
-      {/* Announcement Ticker */}
-      <div className="ticker">
-        <marquee>Selection Ongoing! Please check your dashboard, email, and SMS regularly for updates.</marquee>
-      </div>
+      
+
+
+{/* Announcement Ticker */}
+<div className="ticker">
+  <div className="ticker-content">
+    Selection Ongoing! Please check your dashboard, email, and SMS regularly for updates.
+  </div>
+</div>
 
       
+
 
       {/* Partners Logos */}
       <section className="partners">

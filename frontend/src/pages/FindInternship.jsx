@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import "../styles/FindInternship.css";
-import { FaUser, FaGraduationCap, FaLaptopCode, FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
+import {
+  FaUser,
+  FaGraduationCap,
+  FaLaptopCode,
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaPhone,
+} from "react-icons/fa";
+import API_BASE_URL from "../config";
 
 export default function FindInternship() {
   const [form, setForm] = useState({
@@ -16,6 +24,7 @@ export default function FindInternship() {
     email: "",
     phone: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -26,21 +35,50 @@ export default function FindInternship() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("🚀 Profile submitted successfully! (Backend integration coming soon)");
-    console.log(form);
+    setLoading(true);
+
+    try {
+      const formData = new FormData();
+      for (const key in form) {
+        if (form[key] !== null) {
+          formData.append(key, form[key]);
+        }
+      }
+
+      const res = await fetch(`${API_BASE_URL}/api/internship/submit`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("✅ Recommendations fetched!");
+        console.log("Recommendations:", data.recommendations);
+        // yahan data.recommendations ko state me set karo taaki frontend me dikh paaye
+      } else {
+        alert(data.message || "Submission failed");
+      }
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert("Server error, try again");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="find-internship-page">
       <div className="form-header">
         <h2>🎓 Student Internship Profile</h2>
-        <p>Fill in your details to get <span>ML-powered internship recommendations</span>.</p>
+        <p>
+          Fill in your details to get <span>ML-powered internship recommendations</span>.
+        </p>
       </div>
 
       <form className="internship-form" onSubmit={handleSubmit}>
-        
         {/* Identification */}
         <div className="form-card">
           <h3>👤 Identification</h3>
@@ -62,7 +100,12 @@ export default function FindInternship() {
           <h3>🎓 Academic Info</h3>
           <div className="input-group">
             <FaGraduationCap className="icon" />
-            <select name="degree" value={form.degree} onChange={handleChange} required>
+            <select
+              name="degree"
+              value={form.degree}
+              onChange={handleChange}
+              required
+            >
               <option value="">Select Degree</option>
               <option>B.Tech</option>
               <option>MBA</option>
@@ -71,7 +114,6 @@ export default function FindInternship() {
               <option>Other</option>
             </select>
           </div>
-
           <div className="input-group">
             <FaGraduationCap className="icon" />
             <select
@@ -87,7 +129,6 @@ export default function FindInternship() {
               <option>4th Year</option>
             </select>
           </div>
-
           <div className="input-group">
             <FaLaptopCode className="icon" />
             <select
@@ -105,37 +146,36 @@ export default function FindInternship() {
             </select>
           </div>
         </div>
-{/* Skills */}
-<div className="form-card">
-  <h3>💡 Skills</h3>
-  <div className="input-group">
-    <FaLaptopCode className="icon" />
-    <input
-      type="text"
-      name="skills"
-      placeholder="Enter skills (comma separated)"
-      value={form.skills}
-      onChange={handleChange}
-      required
-    />
-  </div>
-  <small>Tip: Add at least 3–5 core skills for better matches</small>
-</div>
 
-{/* Resume Upload - NEW Separate Row */}
-<div className="form-card resume-upload-highlight">
-  <h3>Upload Resume</h3>
-  <p>Let Us analyze your CV & auto-suggest skills and internships 🚀</p>
-  <input
-    type="file"
-    name="resume"
-    accept=".pdf,.doc,.docx"
-    onChange={handleChange}
-    className="file-upload"
-  />
-  <small>Supported formats: PDF, DOC, DOCX</small>
-</div>
+        {/* Skills */}
+        <div className="form-card">
+          <h3>💡 Skills</h3>
+          <div className="input-group">
+            <FaLaptopCode className="icon" />
+            <input
+              type="text"
+              name="skills"
+              placeholder="Enter skills (comma separated)"
+              value={form.skills}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <small>Add 3–5 core skills for better matches</small>
+        </div>
 
+        {/* Resume Upload */}
+        <div className="form-card resume-upload-highlight">
+          <h3>Upload Resume</h3>
+          <input
+            type="file"
+            name="resume"
+            accept=".pdf,.doc,.docx"
+            onChange={handleChange}
+            className="file-upload"
+          />
+          <small>PDF, DOC, DOCX supported</small>
+        </div>
 
         {/* Preferences */}
         <div className="form-card">
@@ -156,15 +196,13 @@ export default function FindInternship() {
               <option>Hyderabad</option>
             </select>
           </div>
-
           <input
             type="text"
             name="duration_preference"
-            placeholder="Preferred Duration (e.g., 6 months)"
+            placeholder="Preferred Duration (e.g. 6 months)"
             value={form.duration_preference}
             onChange={handleChange}
           />
-
           <input
             type="text"
             name="stipend_expectation"
@@ -189,7 +227,7 @@ export default function FindInternship() {
             />
           </div>
           <div className="input-group">
-            <FaPhone className="icon" />
+            <FaPhone class name="icon" />
             <input
               type="tel"
               name="phone"
@@ -201,8 +239,8 @@ export default function FindInternship() {
           </div>
         </div>
 
-        <button type="submit" className="btn-submit">
-          Get Internship Recommendations
+        <button type="submit" className="btn-submit" disabled={loading}>
+          {loading ? "Submitting..." : "Get Internship Recommendations"}
         </button>
       </form>
     </div>

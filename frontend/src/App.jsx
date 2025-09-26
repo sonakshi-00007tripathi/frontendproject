@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import RecommendationDashboard from "./pages/RecommendationDashboard";
 import ResumeAnalyzer from "./pages/ResumeAnalyzer";
+import Recommendations from "./pages/Recommendations";
 
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -96,6 +97,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+           <Route path="/recommendations" element={<Recommendations />} />
 
           {/* Fallback */}
           <Route path="*" element={<NotFound />} />

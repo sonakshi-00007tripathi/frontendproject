@@ -16,13 +16,17 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     
+
+
+
+
       const res = await fetch(`${API_BASE_URL}/api/v1/users/login`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(form),
-  credentials: "include", // if using cookies
-});
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+        credentials: "include",
+      });
+
 
 
       const data = await res.json();

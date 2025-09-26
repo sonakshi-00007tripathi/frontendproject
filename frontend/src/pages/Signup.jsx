@@ -19,28 +19,23 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
-
-const res = await fetch(`${API_BASE_URL}/api/v1/users/register`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(form),
-  credentials: "include",
-});
-
-
-
+      const res = await fetch(`${API_BASE_URL}/api/v1/users/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+        credentials: "include",
+      });
 
       const data = await res.json();
 
       if (res.ok) {
-        alert("Signup successful!");
+        alert(data.message || "Signup successful!");
         navigate("/login");
       } else {
         alert(data.message || "Signup failed");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Signup error:", error);
       alert("Something went wrong. Try again later.");
     }
   };

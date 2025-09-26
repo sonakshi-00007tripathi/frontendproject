@@ -16,30 +16,25 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
-
-
-
       const res = await fetch(`${API_BASE_URL}/api/v1/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-        credentials: "include",
+        credentials: "include", // ✅ to handle cookies
       });
-
-
 
       const data = await res.json();
 
       if (res.ok) {
-        login(data.token); // ✅ Save token in context + localStorage
+        // ✅ Save token properly
+        login(data.data.accessToken); 
         alert("Login successful!");
         navigate("/home");
       } else {
         alert(data.message || "Invalid credentials");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Login error:", error);
       alert("Something went wrong. Try again.");
     }
   };

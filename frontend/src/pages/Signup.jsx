@@ -19,12 +19,13 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${API_BASE_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-        credentials: "include", // ✅ for cookies (optional)
-      });
+      const res = await fetch(`${API_BASE_URL}/api/v1/users/register`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(form),
+  credentials: "include", // if using cookies
+});
+
 
       const data = await res.json();
 
